@@ -1,14 +1,15 @@
-var canvas;
-var context;
-
 // 実装する関数や演算
 const functionGroups = {
     constant: ["PI", "E"],
-    binary: ["+", "-", "*", "/"],
+    binary: ["+", "-", "*", "/", "\,"],
     // binary: {"+":"sum", "-":"subtract", "*":"multiply", "/":"divide"},
-    unary: ["sinh", "cosh", "tanh", "sin", "cos", "tan", "abs", "sqrt"]
+    unary: ["log10", "log1p", "log2", "log",
+    "asinh", "acosh", "atanh", 
+    "sinh", "cosh", "tanh", 
+    "asin", "acos", "atan", 
+    "sin", "cos", "tan", 
+    "abs", "sqrt"]
 }
-
 
 
 
@@ -119,16 +120,38 @@ function getFunctionFromText(t=""){
         console.error(`関数に変換できません  t=${t}`)
     }
     else{
-        for (let f of functionGroups.unary){
-            t = t.replace(f, `Math.${f}`)
+        for (let i=0; i<functionGroups.unary.length; i++){
+            f = functionGroups.unary[i]
+            t = t.replace(f, `[placeholder-${i}]`)
         }
-        for (let c of functionGroups.constant){
-            t = t.replace(c, `Math.${c}`)
+        for (let i=0; i<functionGroups.unary.length; i++){
+            f = functionGroups.unary[i]
+            t = t.replace(`[placeholder-${i}]`, `Math.${f}`)
+        }
+
+        for (let i=0; i<functionGroups.constant.length; i++){
+            c = functionGroups.constant[i]
+            t = t.replace(c, `[placeholder-${i}]`)
+        }
+        for (let i=0; i<functionGroups.constant.length; i++){
+            c = functionGroups.constant[i]
+            t = t.replace(`[placeholder-${i}]`, `Math.${c}`)
         }
         return new Function("x", "y", `return normalize(${t})*255`)
     }
 }
 // ここまで
+
+
+// canvasの座標変換
+function coordinateTransfom(x, y, canvas){
+    // canvasを[-1, 1]x[-1, 1]とみなす
+    // x, y -> u, v
+    u = (2*x - canvas.width)/(canvas.width)
+    v = (canvas.height - 2*y)/(canvas.height)
+    return [u, v]
+}
+
 
 
 
@@ -142,20 +165,11 @@ function getRGBFunction(r, g, b){
     return f
 }
 
-function coordinateTransfom(x, y){
-    // canvasを[-1, 1]x[-1, 1]とみなす
-    // x, y -> u, v
-    u = (2*x - canvas.width)/(canvas.width)
-    v = (canvas.height - 2*y)/(canvas.height)
-    return [u, v]
-}
-
-
-function drawGraph(f){
+function drawGraph(f, canvas, context){
     step = 1
     for (let x=0; x<canvas.width; x+=step){
         for (let y=0; y<canvas.height; y+=step){
-            let [u, v] = coordinateTransfom(x, y)
+            let [u, v] = coordinateTransfom(x, y, canvas)
             let color = f(u, v)
             context.fillStyle = `rgb(${color[0]}, ${color[1]}, ${color[2]})`
             // console.log(u, v, color)

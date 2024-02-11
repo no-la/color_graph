@@ -7,12 +7,59 @@
 </head>
 <body>
     <div class="wrapper">
+        <section class="consept-sec">
+            <header class="section-header">
+                <h1>5次元グラフの描画</h1>
+            </header>
+            <p>
+                "4次元以上のグラフは図示できない"という話があります。
+                <br>
+                ここでは、xy座標平面から色への写像を考えることで、5次元グラフの描画を試みます。
+            </p>
+            <section class="sub-section">
+                <header class="sub-section-header">
+                    <h3>注意</h3>
+                </header>
+                <p>
+                    この話は、あくまで私の感想的なものでしかなく、厳密なものではありません。
+                    実際、"次元"すら定義せずに、なんとな～くで話を進めます。
+                    <br>
+                    また、正直大した話ではないので、私以外にとっては既知の事実であり、改めて言及するようなことではないかもしれません。
+                    もしそうだったらちょっと悲しいです。
+                </p>
+            </section>            
+        </section>
+        <section class="graph-example-sec">
+            <div class="function-cover">
+                <div class="display-graph-formula">
+                    \[
+                    \begin{array}{ccc}
+                    [-1, 1] \times [-1, 1] & \longrightarrow & RGB\\
+                    \class{rotated-symbol}{\in} && \class{rotated-symbol}{\in}\\
+                    (x, y) & \longmapsto & {
+                        \begin{pmatrix}
+                        \sqrt{x^2+y^2}\\
+                        \frac{\arctan{\frac{y}{x}}}{\pi+2}\\
+                        0
+                        \end{pmatrix}}
+                    \end{array}
+                    \]
+                </div>
+                <div class="display-graph-cover">
+                    <canvas id="sub-canvas-1" width="300" height="300" style="border:1px solid #000;"></canvas>
+                    <br>
+                </div>
+            </div>
+        </section>
         <section class="drow-graph-sec">
-            <h1>title</h1>
+            <header class="section-header">
+                <h1>好きな写像でやってみよう！</h1>
+            </header>
+
             
             <div class="function-cover">
                 <div class="input-function-cover">
-                    好きな写像を入力してください.<br>
+                    <p>好きな写像を入力してください。</p>
                     <div class="input-function-area">
                         <div class="function-from">
                             (x, y) ->
@@ -34,7 +81,8 @@
                     </div>
                 </div>
                 <div class="display-graph-cover">
-                    <canvas id="myCanvas" width="300" height="300" style="border:1px solid #000;"></canvas>
+                    <canvas id="main-canvas" width="300" height="300" style="border:1px solid #000;"></canvas>
+                    <br>
                 </div>
             </div>
         </section>    
@@ -43,5 +91,6 @@
     <script src="js/color_graph.js"></script>
     <script src="js/main.js"></script>
     <script src="js/test.js"></script>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </body>
 </html>

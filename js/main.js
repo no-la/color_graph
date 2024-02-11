@@ -1,7 +1,8 @@
+var mainCanvas, mainContext
 
 function load(){
-    canvas = document.getElementById("myCanvas")
-    context = canvas.getContext("2d")
+    mainCanvas = document.getElementById("main-canvas")
+    mainContext = mainCanvas.getContext("2d")
 
     // event
     document.getElementById("send-function").addEventListener("click", sendFunction)
@@ -13,7 +14,7 @@ function sendFunction(e){
     g = document.getElementById("input-G").value
     b = document.getElementById("input-B").value
     f = getRGBFunction(r, g, b)
-    drawGraph(f)
+    drawGraph(f, mainCanvas, mainContext)
 }
 
 

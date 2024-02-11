@@ -2,15 +2,35 @@
 
 
 .wrapper{
-    width: 400px;
+    width: 500px;
 }
 
+section{
+    margin-top: 30px;
+}
+
+.section-header{
+    background-color: rgb(178, 221, 206);
+    height: 60px;
+}
 h1{
+    line-height: 60px;
     text-align: center;
 }
+
+.sub-section-header{
+    background-color: rgb(178, 221, 206);
+    height: 40px;
+}
+h3{
+    line-height: 40px;
+    text-align: center;
+}
+
+
 .function-cover{
     padding: 3px;
-    width: 400px;
+    width: 500px;
 }
 
 .input-function-area{
@@ -38,5 +58,11 @@ h1{
 .display-graph-cover{
     margin-top: 20px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
+}
+
+.rotated-symbol{
+    display: inline-block;
+    transform: rotate(-90deg);
 }
