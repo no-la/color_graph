@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Color Graph</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <section class="drow-graph-sec">
+            <h1>title</h1>
+            
+            <div class="function-cover">
+                <div class="input-function-cover">
+                    好きな写像を入力してください.<br>
+                    <div class="input-function-area">
+                        <div class="function-from">
+                            (x, y) ->
+                        </div>
+                        <ol type="A" class="input-function-list">
+                            <li value="18">
+                                <input type="text" id="input-R" value="sqrt(x*x+y*y)">
+                            </li>
+                            <li value="7">
+                                <input type="text" id="input-G" value="0">
+                            </li>
+                            <li value="2">
+                                <input type="text" id="input-B" value="0">
+                            </li>
+                        </ol>
+                    </div>
+                    <div class="send-button-area">
+                        <input type="button" value="send" id="send-function" class="send-button">
+                    </div>
+                </div>
+                <div class="display-graph-cover">
+                    <canvas id="myCanvas" width="300" height="300" style="border:1px solid #000;"></canvas>
+                </div>
+            </div>
+        </section>    
+    </div>
+
+    <script src="color_graph.js"></script>
+    <script src="main.js"></script>
+    <script src="test.js"></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+
+
+
+.wrapper{
+    width: 400px;
+}
+
+h1{
+    text-align: center;
+}
+.function-cover{
+    padding: 3px;
+    width: 400px;
+}
+
+.input-function-area{
+    display: flex;
+    height: 110px;
+    justify-content: center;
+}
+.function-from{
+    line-height: 110px;
+    text-align: center;
+}
+.input-function-list{
+    display: flex;
+    flex-direction: column;
+}
+.input-function-list *{
+    margin: 1px;
+}
+
+.send-button-area{
+    text-align: center;
+}
+
+
+.display-graph-cover{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
