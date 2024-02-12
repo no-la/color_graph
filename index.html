@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="background-transparenter"></div>
     <div class="wrapper">
         <section class="consept-sec">
             <header class="section-header">
@@ -16,45 +17,269 @@
                 <br>
                 ここでは、xy座標平面から色への写像を考えることで、5次元グラフの描画を試みます。
             </p>
-            <section class="sub-section">
-                <header class="sub-section-header">
-                    <h3>注意</h3>
+            <div class="sub-section remark-sec">
+                <header class="sub-section-header remark-header">
+                    <h3>※注意※</h3>
                 </header>
                 <p>
-                    この話は、あくまで私の感想的なものでしかなく、厳密なものではありません。
+                    この話はあくまで私の感想的なものであり、厳密なものではありません。
                     実際、"次元"すら定義せずに、なんとな～くで話を進めます。
                     <br>
-                    また、正直大した話ではないので、私以外にとっては既知の事実であり、改めて言及するようなことではないかもしれません。
+                    また、正直大した話でもないので、みなさんにとって、言及するまでもない程度の簡単な事実である可能性も、大いにあります。
                     もしそうだったらちょっと悲しいです。
                 </p>
-            </section>            
+            </div>
+            <div class="sub-section">
+                <header class="sub-section-header">
+                    <h3>目次</h3>
+                </header>
+                <p>
+                    <ul>
+                        <li><a href="index.html#explain-sec">説明</a></li>
+                        <li><a href="index.html#graph-example-sec">具体例</a></li>
+                        <ul>
+                            <li><a href="index.html#example-1">自然な写像</a></li>
+                            <li><a href="index.html#example-2">単位球</a></li>
+                            <li><a href="index.html#example-3">ベクトルの大きさ</a></li>
+                            <li><a href="index.html#example-4">ベクトルのなす角</a></li>
+                            <li><a href="index.html#example-5">極座標</a></li>
+                        </ul>
+                        <li><a href="index.html#drow-your-graph">お試しコーナー</a></li>
+                    </ul>
+                </p>
+            </div>         
         </section>
-        <section class="graph-example-sec">
-            <div class="function-cover">
-                <div class="display-graph-formula">
-                    \[
+        <section class="explain-sec" id="explain-sec">
+            <header class="section-header">
+                <h2>説明</h2>
+            </header>
+            <p>
+                簡単にまとめると、「画像って5次元グラフとみなせるね」というお話です。
+                各ピクセル(x, y)が、色(r, g, b)を持ってるから5次元です。
+            </p>
+            <p>
+                では改めて、数学の話から始めます。<br><br>
+                \[
+                    A = [-1, 1] \times [-1, 1]\\
+                    RGB = [0, 1] \times [0, 1] \times [0, 1]
+                \]
+                とします。(ただし、\([\;]\) は閉区間を表す。)
+                <br>
+                このとき、次のような写像を考えることができます。
+                \[
                     \begin{array}{ccc}
                     [-1, 1] \times [-1, 1] & \longrightarrow & RGB\\
                     \class{rotated-symbol}{\in} && \class{rotated-symbol}{\in}\\
                     (x, y) & \longmapsto & {
                         \begin{pmatrix}
-                        \sqrt{x^2+y^2}\\
-                        \frac{\arctan{\frac{y}{x}}}{\pi+2}\\
-                        0
+                        f_R(x, y)\\
+                        f_G(x, y)\\
+                        f_B(x, y)
                         \end{pmatrix}}
                     \end{array}
-                    \]
+                \]
+                (\(f_R, f_G, f_B\) は全て、\(A\) から\([0, 1]\) への写像とする。)
+                <br>
+                この写像は、2次元の集合 \(A\) から3次元の集合 \(RGB\) への写像であり、
+                そのグラフは \(A\times RGB\) の部分集合であるから、5次元ということになります。
+            </p>
+            <p>
+                "4次元以上のグラフは図示できない"ならば、当然、このグラフも図示することは出来ません。
+                <br>
+                しかし、今、\((x,y)\in A\) とピクセル(x, y)、
+                \((r,g,b)\in RGB\) と色(r, g, b)の対応を自然に考えることができ、
+                この対応によって、上の写像は一つの画像を作ります。
+                <br>
+                また、逆の操作によって、画像を写像とみなすことができます。
+            </p>
+            <p>
+                これによって、5次元のグラフを図示（？）できるというわけです。
+            </p>
+            <div class="display-graph-cover">
+                <canvas id="sub-canvas-0" width="300" height="300"></canvas>
+                <br>
+            </div>
+            <p>
+                \(A\) を図示すると、上図の灰色の部分になります。
+                <br>
+                この正方形に色を置くことで5次元のグラフを表現します。
+                <br>
+                (RGBの各値が \([0,1]\) をはみ出した場合、切り上げ、切り捨てによって、\(0\) または \(1\) に直します。)
+            </p>
+        </section>
+        <section class="graph-example-sec" id="graph-example-sec">
+            <header class="section-header">
+                <h2>具体例</h2>
+            </header>
+            <p>
+                比較的わかりやすく、視覚的に面白い例をいくつか紹介します。
+            </p>
+            <div class="sub-section" id="example-1">
+                <header class="sub-section-header">
+                    <h3>自然な写像</h3>
+                </header>
+                <div class="function-cover">
+                    <div class="display-graph-formula">
+                        \[
+                            \begin{array}{ccc}
+                            A & \longrightarrow & RGB\\
+                            \class{rotated-symbol}{\in} && \class{rotated-symbol}{\in}\\
+                            (x, y) & \longmapsto & {
+                                \begin{pmatrix}
+                                \frac{x+1}{2}\\
+                                \frac{y+1}{2}\\
+                                0
+                                \end{pmatrix}}
+                            \end{array}
+                        \]
+                    </div>
+                    <div class="display-graph-cover">
+                        <canvas id="sub-canvas-1" width="200" height="200" style="border:1px solid #000;"></canvas>
+                        <br>
+                    </div>
                 </div>
-                <div class="display-graph-cover">
-                    <canvas id="sub-canvas-1" width="300" height="300" style="border:1px solid #000;"></canvas>
+                <p>
+                    \((x, y)\in A\) を正規化してRGBのRGに対応させるグラフです。
                     <br>
+                    上に行くほど緑に、右に行くほど赤に近づきます。
+                    <br>
+                    グラフは4次元ですが、かなりわかりやすく描画されています。
+                </p>
+            </div>
+            <div class="sub-section" id="example-2">
+                <header class="sub-section-header">
+                    <h3>単位球</h3>
+                </header>
+                <div class="function-cover">
+                    <div class="display-graph-formula">
+                        \[
+                            \begin{array}{ccc}
+                            A & \longrightarrow & RGB\\
+                            \class{rotated-symbol}{\in} && \class{rotated-symbol}{\in}\\
+                            (x, y) & \longmapsto & {
+                                \begin{pmatrix}
+                                \sqrt{1-x^2-y^2}\\
+                                0\\
+                                0
+                                \end{pmatrix}}
+                            \end{array}
+                        \]
+                    </div>
+                    <div class="display-graph-cover">
+                        <canvas id="sub-canvas-2" width="200" height="200" style="border:1px solid #000;"></canvas>
+                        <br>
+                    </div>
+                </div>
+                <p>
+                    RGBのRGが常に0なので、このグラフの点は \((x,y,\sqrt{1-x^2-y^2})\) とみなすことができます。
+                    <br>
+                    \(r=\sqrt{1-x^2-y^2}\) とおけば、\(x^2+y^2+r^2=1\) となるので、このグラフは単位球を表していることがわかります。
+                    <br>
+                    実際、画像も球のように見えます。                 
+                </p>
+                <p>
+                    ※ \(\sqrt{}\) の中身が負になりますが、エラーの結果として1が返されています。球の外側が赤いのはそのためです。
+                </p>
+            </div>
+            <div class="sub-section" id="example-3">
+                <header class="sub-section-header">
+                    <h3>ベクトルの大きさ</h3>
+                </header>
+                <div class="function-cover">
+                    <div class="display-graph-formula">
+                        \[
+                            \begin{array}{ccc}
+                            A & \longrightarrow & RGB\\
+                            \class{rotated-symbol}{\in} && \class{rotated-symbol}{\in}\\
+                            (x, y) & \longmapsto & {
+                                \begin{pmatrix}
+                                \sqrt{x^2+y^2}\\
+                                0\\
+                                0
+                                \end{pmatrix}}
+                            \end{array}
+                        \]
+                    </div>
+                    <div class="display-graph-cover">
+                        <canvas id="sub-canvas-3" width="200" height="200" style="border:1px solid #000;"></canvas>
+                        <br>
+                    </div>
+                </div>
+                <p>
+                    \((x, y)\in A\) の原点からの距離をRGBのRに対応させるグラフです。\(x^2+y^2\) の符号の違いで、1つ前の例と色の配置が逆になっています。
+                    <br>
+                    各ピクセル(x, y)が赤いほど、原点と(x, y)の距離が遠くなっています。
+                </p>
+            </div>
+            <div class="sub-section" id="example-4">
+                <header class="sub-section-header">
+                    <h3>x軸とのなす角</h3>
+                </header>
+                <div class="function-cover">
+                    <div class="display-graph-formula">
+                        \[
+                            \begin{array}{ccc}
+                            A & \longrightarrow & RGB\\
+                            \class{rotated-symbol}{\in} && \class{rotated-symbol}{\in}\\
+                            (x, y) & \longmapsto & {
+                                \begin{pmatrix}
+                                0\\
+                                \arccos \left( \frac{x}{\sqrt{x^2+y^2}} \right)\\
+                                0
+                                \end{pmatrix}}
+                            \end{array}
+                        \]
+                    </div>
+                    <div class="display-graph-cover">
+                        <canvas id="sub-canvas-4" width="200" height="200" style="border:1px solid #000;"></canvas>
+                        <br>
+                    </div>
+                </div>
+                <p>
+                    原点から各点へ向かうベクトルとx軸のなす角を、RGBのGに対応させるグラフです。
+                    <br>
+                    つまり、各ピクセル(x, y)が緑であるほど、ベクトル(x, y)とx軸のなす角が大きいということです。
+                </p>
+                <p>
+                    ※ \(\arccos\) と書いてありますが、場合分けと正規化が必要なため、実際はもうちょっとだけ複雑な式になります。
+                </p>
+            </div>
+            <div class="sub-section" id="example-5">
+                <header class="sub-section-header">
+                    <h3>極座標</h3>
+                </header>
+                <div class="function-cover">
+                    <div class="display-graph-formula">
+                        \[
+                            \begin{array}{ccc}
+                            A & \longrightarrow & RGB\\
+                            \class{rotated-symbol}{\in} && \class{rotated-symbol}{\in}\\
+                            (x, y) & \longmapsto & {
+                                \begin{pmatrix}
+                                \sqrt{x^2+y^2}\\
+                                \arccos \left( \frac{x}{\sqrt{x^2+y^2}} \right)\\
+                                0
+                                \end{pmatrix}}
+                            \end{array}
+                        \]
+                    </div>
+                    <div class="display-graph-cover">
+                        <canvas id="sub-canvas-5" width="200" height="200" style="border:1px solid #000;"></canvas>
+                        <br>
+                    </div>
+                    <p>
+                        上の２つの例を合わせると、RGBのRGがAの極座標表現に対応します。
+                        <br>
+                        これも4次元のグラフですが、そこそこ見やすく、なんとなく意味も分かりそうです。
+                    </p>
                 </div>
             </div>
         </section>
-        <section class="drow-graph-sec">
+        <section class="drow-graph-sec" id="drow-your-graph">
             <header class="section-header">
-                <h1>好きな写像でやってみよう！</h1>
+                <h1>お試しコーナー</h1>
             </header>
+            <p>写像を入力してdrawボタンをおすと、その写像のグラフを描画します。</p>
 
             
             <div class="function-cover">
@@ -77,7 +302,7 @@
                         </ol>
                     </div>
                     <div class="send-button-area">
-                        <input type="button" value="send" id="send-function" class="send-button">
+                        <input type="button" value="draw" id="send-function" class="send-button">
                     </div>
                 </div>
                 <div class="display-graph-cover">
@@ -87,7 +312,6 @@
             </div>
         </section>    
     </div>
-
     <script src="js/color_graph.js"></script>
     <script src="js/main.js"></script>
     <script src="js/test.js"></script>

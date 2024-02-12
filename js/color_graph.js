@@ -8,7 +8,7 @@ const functionGroups = {
     "sinh", "cosh", "tanh", 
     "asin", "acos", "atan", 
     "sin", "cos", "tan", 
-    "abs", "sqrt"]
+    "abs", "sqrt", "sign"]
 }
 
 
@@ -165,7 +165,10 @@ function getRGBFunction(r, g, b){
     return f
 }
 
-function drawGraph(f, canvas, context){
+function drawGraph(f, canvas, context=undefined){
+    if (context===undefined){
+        context = canvas.getContext("2d")
+    }
     step = 1
     for (let x=0; x<canvas.width; x+=step){
         for (let y=0; y<canvas.height; y+=step){
