@@ -103,6 +103,12 @@ function drawExplainCanvas(){
 }
 
 
+// init available functions
+function setAvailableFunctions(){
+    node = getElementById("available-functions")
+    
+}
+
 
 // set load event
 document.addEventListener("DOMContentLoaded", load)

@@ -3,12 +3,11 @@ const functionGroups = {
     constant: ["PI", "E"],
     binary: ["+", "-", "*", "/", "\,"],
     // binary: {"+":"sum", "-":"subtract", "*":"multiply", "/":"divide"},
-    unary: ["log10", "log1p", "log2", "log",
-    "asinh", "acosh", "atanh", 
-    "sinh", "cosh", "tanh", 
+    _math: ["log",
     "asin", "acos", "atan", 
     "sin", "cos", "tan", 
-    "abs", "sqrt", "sign"]
+    "abs", "sqrt", "sign", "max", "min"],
+    myFunc: ["norm", "radian"]
 }
 
 
@@ -73,8 +72,10 @@ function checkFunctionText(t=""){
                 q = ""
             }
             else{
-                console.warn(`意味を持たない文字列があります t=${t} i=${i} t[i]=${t[i]} q=${q}`)
-                return false
+                errorText = `意味を持たない文字列があります t=${t} i=${i} t[i]=${t[i]} q=${q}`
+                alert(`意味を持たない文字列があります target : ${t}, ${q}`)
+                console.warn(errorText)
+                throw SyntaxError(errorText)
             }
         }
         else{
@@ -83,13 +84,17 @@ function checkFunctionText(t=""){
             if (functionGroups.constant.includes(q)){
                 q = ""
             }
-            else if (functionGroups.unary.includes(q)){
+            else if (functionGroups._math.includes(q)){
+                q = ""
+            }
+            else if (functionGroups.myFunc.includes(q)){
                 q = ""
             }
         }
     }
     if (q.length!=0){
-        return false
+        alert(`末尾に無効な文字があります target : ${t}, ${q}`)
+        throw SyntaxError(`末尾に無効な文字があります target : ${t}, ${q}`)
     }
     return true
 }
@@ -114,18 +119,21 @@ function getFunctionFromText(t=""){
         t = "0"
     }
     if (!checkBrackets(t)){
+        alert(`括弧の数が一致していません target : ${t}`)
         console.error(`括弧の数が一致していません t=${t}`)
     }
     if (!checkFunctionText(t)){
+        // alert(`関数に変換できません target : ${t}`)
         console.error(`関数に変換できません  t=${t}`)
     }
     else{
-        for (let i=0; i<functionGroups.unary.length; i++){
-            f = functionGroups.unary[i]
+        // 必要なら置き換える
+        for (let i=0; i<functionGroups._math.length; i++){
+            f = functionGroups._math[i]
             t = t.replace(f, `[placeholder-${i}]`)
         }
-        for (let i=0; i<functionGroups.unary.length; i++){
-            f = functionGroups.unary[i]
+        for (let i=0; i<functionGroups._math.length; i++){
+            f = functionGroups._math[i]
             t = t.replace(`[placeholder-${i}]`, `Math.${f}`)
         }
 

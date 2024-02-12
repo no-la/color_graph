@@ -285,19 +285,55 @@
             <div class="function-cover">
                 <div class="input-function-cover">
                     <p>好きな写像を入力してください。</p>
+                    <details>
+                        <summary>使用可能な定数・演算子・関数一覧</summary>
+                        定数 :
+                        <ul>
+                            <li>PI : 円周率</li>
+                            <li>E : ネイピア数</li>
+                        </ul>
+                        演算子 :
+                        <ul>
+                            <li>+ : 和</li>
+                            <li>- : 差</li>
+                            <li>* : 積</li>
+                            <li>/ : 商</li>
+                            <li>** : べき乗</li>
+                        </ul>
+                        関数 :
+                        <ul>
+                            <li>log(x) : Eを底とする対数関数</li>
+                            <li>sin(x) : sin</li>
+                            <li>cos(x) : cos</li>
+                            <li>tan(x) : tan</li>
+                            <li>asin(x) : sinの逆関数</li>
+                            <li>acos(x) : cosの逆関数</li>
+                            <li>atan(x) : tanの逆関数</li>
+                            <li>abs(x) : xの絶対値</li>
+                            <li>sqrt(x) : xの平方根</li>
+                            <li>sign(x) : xの符号(-1 or 0 or 1)</li>
+                            <li>max(x, y) : x, yの大きい方</li>
+                            <li>min(x, y) : x, yの小さい方</li>
+                            <li>norm(x, y) : (x, y)と原点の距離</li>
+                            <li>radian(x, y) : ベクトル(x, y)とx軸のなす角(0~PI)</li>
+                        </ul>
+                        <p id="available-functions">
+
+                        </p>
+                    </details>
                     <div class="input-function-area">
                         <div class="function-from">
                             (x, y) ->
                         </div>
                         <ol type="A" class="input-function-list">
                             <li value="18">
-                                <input type="text" id="input-R" value="sqrt(x*x+y*y)">
+                                <input type="text" id="input-R" value="sqrt(1-x*x+y*y)">
                             </li>
                             <li value="7">
-                                <input type="text" id="input-G" value="0">
+                                <input type="text" id="input-G" value="sqrt(1+x*x-y*y)">
                             </li>
                             <li value="2">
-                                <input type="text" id="input-B" value="0">
+                                <input type="text" id="input-B" value="x*y">
                             </li>
                         </ol>
                     </div>
@@ -310,7 +346,8 @@
                     <br>
                 </div>
             </div>
-        </section>    
+        </section>
+        <p class="note">意見、要望、質問などは遠慮なくどうぞ。</p>  
     </div>
     <script src="js/color_graph.js"></script>
     <script src="js/main.js"></script>
